@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container" id="shoppingOver">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item" id="firstCart">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="firstMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="firstCartInput" type="text" class="form-control text-center" value="1">
+                           <button id="firstPlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="firstCartPrice">1219</span></h5>
+                        <img src="images/remove.png" alt="" id="removeFirstcart" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item" id="secondCart">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="secondMinusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="secondCartInput" type="text" class="form-control text-center" value="1">
+                           <button id="secondPlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="secondCartPrice">59</span></h5>
+                        <img src="images/remove.png" alt="" id="removeSecondcart" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$<span id="subTotal">1278</span></h5>
+                        <h5>$<span id="tax">3</span></h5>
+                        <h5>$<span id="total">1281</span> </h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" id="checkOutBtn" class="btn btn-success check-out">Check Out</button>
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="showMe">
+         <h1>Thanks For Shopping</h1>
+      </div>
+   </section>
+   <script>
+      //add in first cart
+         const firstPlusBtn = document.getElementById('firstPlusBtn');
+         firstPlusBtn.addEventListener('click', function(){
+         const firstCartInput = document.getElementById('firstCartInput').value;
+         const firstCartNumber = parseFloat(firstCartInput);
+         document.getElementById('firstCartInput').value = firstCartNumber + 1;
+
+         const firstCartPrice = document.getElementById('firstCartPrice').innerText;
+         const firstCartPriceNum = parseFloat(firstCartPrice);
+         document.getElementById('firstCartPrice').innerText = firstCartPriceNum + 1219;
+
+         const subTotal = document.getElementById('subTotal').innerText;
+         const sunNum = parseFloat(subTotal);
+         document.getElementById('subTotal').innerText = 1278 + firstCartPriceNum;
+         const subTotalNum = 1278 + firstCartPriceNum;
+         const tax = document.getElementById("tax").innerText;
+         const taxNum = parseFloat(tax);
+         document.getElementById("tax").innerText = taxNum + 3;
+         const taxTotalNum = taxNum + 3;
+         const total = document.getElementById("total").innerText;
+         const totalNum = parseFloat(total);
+         document.getElementById("total").innerText = subTotalNum + taxTotalNum;
+      })
+
+         //decrease first cart item
+         const firstMinusBtn = document.getElementById('firstMinusBtn');
+         firstMinusBtn.addEventListener('click', function(){
+         const firstCartInput = document.getElementById('firstCartInput').value;
+         const firstCartNumber = parseFloat(firstCartInput);
+         if(firstCartNumber > 1){
+         document.getElementById('firstCartInput').value = firstCartNumber - 1;
+         const firstCartPrice = document.getElementById('firstCartPrice').innerText;
+         const firstCartPriceNum = parseFloat(firstCartPrice);
+         document.getElementById('firstCartPrice').innerText = firstCartPriceNum - 1219;
+         const subTotal =  document.getElementById('firstCartPrice').innerText;
+         const subNum = parseFloat(subTotal);
+         document.getElementById('firstCartPrice').innerText = 1278 + firstCartPriceNum;
+         subTotalNum = 1278 + firstCartPriceNum;
+         const tax = document.getElementById("tax").innerText;
+         const taxNum = parseFloat(tax);
+         document.getElementById("tax").innerText = taxNum - 3;
+         const taxTotalNum = taxNum - 3;
+         const total = document.getElementById('total').innerText;
+         const totalNum = parseFloat(total);
+         document.getElementById('total').innerText = subTotalNum + taxTotalNum;
+      }
+         }) 
+
+         //first remove button
+      const removeFirstcart = document.getElementById("removeFirstcart");
+      removeFirstcart.addEventListener("click", function(){
+      const firstCartPrice = document.getElementById("firstCartPrice").innerText; 
+      const firstCartPriceNum = parseFloat(firstCartPrice);
+      document.getElementById("firstCartPrice").innerText = 1219;
+      const firstCartInput = document.getElementById("firstCartInput").value;
+      const firstCartNumber = parseFloat(firstCartInput);
+      document.getElementById("firstCartInput").value = 1;
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subNum = parseFloat(subTotal);
+      document.getElementById("subTotal").innerText = 1278;
+      const tax = document.getElementById("tax").innerText;
+      const taxNum = parseFloat(tax);
+      document.getElementById("tax").innerText = 3;
+      const total = document.getElementById("total").innerText;
+      const totalNum = parseFloat(total);
+      document.getElementById("total").innerText = 1281;
+    
+      })
+
+      //adding in second cart
+      const secondPlusBtn = document.getElementById("secondPlusBtn");
+      secondPlusBtn.addEventListener("click", function(){
+      const secondCartInput = document.getElementById("secondCartInput").value;
+      const secondCartNumber = parseFloat(secondCartInput);
+      document.getElementById("secondCartInput").value = secondCartNumber + 1;
+      const secondCartPrice = document.getElementById("secondCartPrice").innerText; 
+      const secondCartPriceNum = parseFloat(secondCartPrice);
+      document.getElementById("secondCartPrice").innerText = secondCartPriceNum + 59; //price option
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subNum = parseFloat(subTotal);
+      document.getElementById("subTotal").innerText = secondCartPriceNum + 59;
+      const subTotalNum =  secondCartPriceNum + 59;//subtotal price option
+      const tax = document.getElementById("tax").innerText;
+      const taxNum = parseFloat(tax);
+      document.getElementById("tax").innerText = taxNum + 2;
+      const taxTotalNum = taxNum + 2;
+      const total = document.getElementById("total").innerText;
+      const totalNum = parseFloat(total);
+      document.getElementById("total").innerText = subTotalNum + taxTotalNum;
+      })
+
+//decreasing second cart item
+      const secondMinusBtn = document.getElementById("secondMinusBtn");
+      secondMinusBtn.addEventListener("click", function(){
+      const secondCartInput = document.getElementById("secondCartInput").value;
+      const secondCartNumber = parseFloat(secondCartInput);
+      if(secondCartNumber > 1){
+      document.getElementById("secondCartInput").value = secondCartNumber - 1;
+      const secondCartPrice = document.getElementById("secondCartPrice").innerText; 
+      const secondCartPriceNum = parseFloat(secondCartPrice);
+      document.getElementById("secondCartPrice").innerText = secondCartPriceNum - 59; //price option
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subNum = parseFloat(subTotal);
+      document.getElementById("subTotal").innerText = subNum - 59;
+      const subTotalNum = secondCartPriceNum - 59; //subtotal price option
+      const tax = document.getElementById("tax").innerText;
+      const taxNum = parseFloat(tax);
+      document.getElementById("tax").innerText = taxNum - 2;
+      const taxTotalNum = taxNum - 2;
+      const total = document.getElementById("total").innerText;
+      const totalNum = parseFloat(total);
+      document.getElementById("total").innerText = subTotalNum + taxTotalNum;
+         }
+      })
+     
+
+      //second remove button
+      const removeSecondcart = document.getElementById("removeSecondcart");
+      removeSecondcart.addEventListener("click", function(){
+      const secondCartInput = document.getElementById("secondCartInput").value;
+      const secondCartNumber = parseFloat(secondCartInput);
+      document.getElementById("secondCartInput").value = 1;
+      const secondCartPrice = document.getElementById("secondCartPrice").innerText; 
+      const secondCartPriceNum = parseFloat(secondCartPrice);
+      document.getElementById("secondCartPrice").innerText = 59; //price option
+      const subTotal = document.getElementById("subTotal").innerText;
+      const subNum = parseFloat(subTotal);
+      document.getElementById("subTotal").innerText = 1278; //subtotal price option
+      const tax = document.getElementById("tax").innerText;
+      const taxNum = parseFloat(tax);
+      document.getElementById("tax").innerText = 3;
+      const total = document.getElementById("total").innerText;
+      const totalNum = parseFloat(total);
+      document.getElementById("total").innerText = 1281;
+      })
+
+      const checkOutButton = document.getElementById('checkOutBtn');
+      checkOutButton.addEventListener('click', function(){
+      const shoppingOver = document.getElementById('shoppingOver');
+      shoppingOver.style.display = 'none';
+      const showMe = document.getElementById('showMe');
+      showMe.style.display = 'block';
+      })
+
+   </script>
+</body>
+
+</html>
